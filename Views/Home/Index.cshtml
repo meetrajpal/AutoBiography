@@ -2,7 +2,57 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style>
+    body {
+        background-image: url("https://www.wsupercars.com/wallpapers-regular/Pagani/2016-Pagani-Huayra-BC-004-1080.jpg");
+        background-size: cover;
+    }
+</style>
+
+<div id="slider" class="carousel slide carousel-fade m-0 " data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#slider" data-bs-slide-to="0" class="active" aria-current="true"
+                aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#slider" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#slider" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        <button type="button" data-bs-target="#slider" data-bs-slide-to="3" aria-label="Slide 3"></button>
+        <button type="button" data-bs-target="#slider" data-bs-slide-to="4" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active w-100" data-bs-interval="4500">
+            <img src="https://www.wsupercars.com/wallpapers-regular/Xiaomi/2024-Xiaomi-SU7-Ultra-Prototype-005-1080.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-md-block top-50">
+                <h1 class="capHead display-1 fw-bold">WELCOME TO AUTO BIOGRAPHY</h1>
+                <p class="fw-bold fs-2">WHERE WE BUILD, YOU LOVE</p>
+            </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="4500">
+            <img src="https://www.wsupercars.com/wallpapers-regular/Rolls-Royce/2024-Rolls-Royce-Droptail-La-Rose-Noire-005-1080.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-md-block top-50">
+                <h1 class="capHead display-1 fw-bold">SEE WHATS POPULAR</h1>
+                <a href="products.jsp" class="fw-bold btn border border-danger">WATCHOUT THE FEATURED AUTOMOTIVE</a>
+            </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="4500">
+            <img src="https://www.wsupercars.com/wallpapers-regular/McLaren/2025-McLaren-W1-008-1080.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-md-block top-50">
+                <h1 class="capHead display-1 fw-bold">BUILD YOUR DREAM WITH US</h1>
+            </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="4500">
+            <img src="https://www.wsupercars.com/wallpapers-regular/Aston-Martin/2024-Aston-Martin-Vantage-GT3-003-1080.jpg " class="d-block w-100" alt="...">
+            <div class="carousel-caption d-md-block top-50">
+                <h1 class="capHead display-1 fw-bold">Talk with Helpers</h1>
+                <a href="forums.jsp" class="fw-bold btn">Forums</a>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#slider" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#slider" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
 </div>

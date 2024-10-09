@@ -1,0 +1,52 @@
+﻿@using AutoBiography.DTO.REQ
+@model LoginReqDto
+
+<style>
+    body{
+        background-image: url("https://www.wsupercars.com/wallpapers-regular/Pagani/2016-Pagani-Huayra-BC-014-1080.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .logDiv{
+        padding: 10vh;
+        backdrop-filter: blur(5px);
+        border-radius: 10vh;
+        box-shadow: 0 0 8px white;
+    }
+
+</style>
+
+<center>
+<div class="logDiv w-50 mt-5">
+    <form class="login mx-3" asp-controller="Auth" asp-action="Login" method="post" enctype="multipart/form-data">
+        <fieldset class="flex-grow-1">
+
+            <h1 class="fw-bolder text-white">Sign In</h1>
+            <div class="row mb-3 ">
+                <input asp-for="Username" class="form-control" placeholder="Enter Your Username">
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            
+            <div class="row mb-3">
+                <input asp-for="Password" class="form-control" placeholder="Enter Your Password">
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            
+            <div>
+                <button type="submit" class="btn btn-primary">Log In</button>
+            </div>
+
+        </fieldset>
+    </form>
+    <br />
+    <a class="btn" asp-controller="UserProfile" asp-action="Create">New To Auto Biography?</a>
+</div>
+</center>
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

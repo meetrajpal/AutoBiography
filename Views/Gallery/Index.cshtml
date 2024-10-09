@@ -1,0 +1,18 @@
+﻿@model List<Gallery>
+
+<style>
+    body {
+        background-image: url("https://www.wsupercars.com/wallpapers-regular/Pagani/2016-Pagani-Huayra-BC-019-1080.jpg");
+        backdrop-filter: blur(4px);
+        background-size: auto;
+        background-position: center;
+        margin: 0;
+    }
+</style>
+
+<main class="d-flex flex-wrap justify-content-center">
+    @foreach(var obj in Model)
+    {
+        <img src="@obj.URI" alt="@obj.Title" width="300" height="300">
+    }
+</main>

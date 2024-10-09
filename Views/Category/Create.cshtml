@@ -1,0 +1,32 @@
+﻿@model Category
+
+<style>
+    body {
+        background-image: url("https://www.wsupercars.com/wallpapers-regular/Tuners/2024-Kalmar-9X9-005-1080.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        backdrop-filter: blur(3px);
+        height: 100vh;
+        margin: 0;
+    }
+</style>
+
+<form method="post">
+    <fieldset>
+        <legend>Add New Category</legend>
+        <div>
+            <label asp-for="Name" class="form-label mt-4"></label> <!--auto labeled from model class-->
+            <div class="input-group mb-3">
+                <input asp-for="Name" class="form-control" placeholder="Required" aria-label="Category Name" aria-describedby="button-addon2">
+                <button class="btn btn-primary" type="submit" id="button-addon2">Add</button>
+            </div>
+            <span asp-validation-for="Name" class="text-danger"></span><!--inbuilt validation acc. to tags in model class-->
+        </div>
+    </fieldset>
+</form>
+
+@section Scripts{
+    @{
+    <partial name="_ValidationScriptsPartial" /> //if it doesnt contains any scripts we can directly add to master view which is upside of @section part
+    }
+}

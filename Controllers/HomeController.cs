@@ -15,11 +15,27 @@ namespace AutoBiography.Controllers
 
         public IActionResult Index()
         {
+            if (HttpContext.Request.Cookies.TryGetValue("UserInfo", out string? userInfo))
+            {
+                ViewBag.UserInfo = userInfo;
+            }
+            else
+            {
+                return RedirectToAction(controllerName:"Auth", actionName:"Login");
+            }
             return View();
         }
 
         public IActionResult Privacy()
         {
+            if (HttpContext.Request.Cookies.TryGetValue("UserInfo", out string? userInfo))
+            {
+                ViewBag.UserInfo = userInfo;
+            }
+            else
+            {
+                return RedirectToAction(controllerName: "Auth", actionName: "Login");
+            }
             return View();
         }
 

@@ -1,0 +1,96 @@
+﻿@model UserProfile
+
+<style>
+    body {
+        min-height: 100vh; 
+        margin: 0; 
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; 
+        background-image: url("https://www.hdcarwallpapers.com/walls/porsche_911_turbo_s_exclusive_aloy_wheel_4k-HD.jpg");
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .pic {
+        width: 30vh;
+        height: 30vh;
+        border: solid white 1px;
+        border-radius: 1000px;
+    }
+
+    .myDiv {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        margin-bottom: 10vh;
+    }
+
+    footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+
+    @@media (min-width: 990px) {
+        .login {
+            display: flex;
+            border-radius: 40px;
+            width: fit-content;
+            text-align: center;
+            padding: 40px;
+            box-shadow: 0px 0px 10px white;
+            backdrop-filter: blur(5px);
+        }
+    }
+
+    @@media (max-width: 990px) {
+        .login {
+            display: block;
+            border-radius: 40px;
+            text-align: center;
+            padding: 40px;
+            box-shadow: 0px 0px 20px white;
+            backdrop-filter: blur(50px);
+        }
+    }
+
+    ::-webkit-scrollbar {
+        width: 0;
+        background: transparent;
+    }
+
+    .form-control {
+        border: solid white 2px
+    }
+</style>
+
+<div class="myDiv text-white">
+    <div class="login mx-3 my-5 ">
+        <fieldset class="flex-grow-1">
+            <legend >Profile</legend>
+            @{
+                if (@Model.PicUri != null)
+                {
+                    <img src="@Model.PicUri" class="pic my-3">
+                }
+            }
+            <br>
+            <h2 class="text-white fs-4">Username: @Model.Username</h2>
+            <br>
+            <h2 class="text-white fs-4">Name: @Model.FullName</h2>
+            <br>
+            <h2 class="text-white fs-4">Mail id: @Model.Email</h2>
+            <br>
+            <a href="/UserProfile/Delete/@Model.Id" class="btn btn-outline-danger fs-6" onclick="return confirmDelete();">Delete Account</a>
+        </fieldset>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function confirmDelete() {
+        return confirm("Are you sure you want to delete your account permanently?");
+    }
+</script>
