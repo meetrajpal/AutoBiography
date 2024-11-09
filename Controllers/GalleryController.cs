@@ -1,5 +1,5 @@
 ﻿using AutoBiography.Data;
-using AutoBiography.Models;
+using AutoBiography.DTO.RES;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;

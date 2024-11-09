@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace AutoBiography.Models;
+namespace AutoBiography.DTO.RES;
 public class UnsplashApiResponse
 {
     [JsonProperty("total")]
