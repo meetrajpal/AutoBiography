@@ -7,6 +7,12 @@
         background-image: url("https://www.wsupercars.com/wallpapers-regular/Pagani/2016-Pagani-Huayra-BC-004-1080.jpg");
         background-size: cover;
     }
+    .capHead, .capFoot{
+        backdrop-filter: blur(3px);
+        /* border: solid 2px white; */
+        border-radius: 10px;
+        box-shadow: 0 0 8px white;
+    }
 </style>
 
 <div id="slider" class="carousel slide carousel-fade m-0 " data-bs-ride="carousel">
@@ -21,16 +27,14 @@
     <div class="carousel-inner">
         <div class="carousel-item active w-100" data-bs-interval="4500">
             <img src="https://www.wsupercars.com/wallpapers-regular/Xiaomi/2024-Xiaomi-SU7-Ultra-Prototype-005-1080.jpg" height="565" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-md-block top-50">
-                <h1 class="capHead display-1 fw-bold">WELCOME TO AUTO BIOGRAPHY</h1>
-                <p class="fw-bold fs-2">WHERE WE COLLECT, YOU LOVE</p>
+            <div class="carousel-caption d-md-block ">
+                <h1 class="capHead display-1 fw-bold text-white">WELCOME TO AUTO BIOGRAPHY</h1>
             </div>
         </div>
         <div class="carousel-item" data-bs-interval="4500">
             <img src="https://www.wsupercars.com/wallpapers-regular/Rolls-Royce/2024-Rolls-Royce-Droptail-La-Rose-Noire-005-1080.jpg" height="565" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-md-block top-50">
-                <h1 class="capHead display-1 fw-bold">SEE WHATS POPULAR</h1>
-                <a asp-controller="Gallery" class="fw-bold btn border border-danger">WATCHOUT THE FEATURED AUTOMOTIVE IMAGES</a>
+            <div class="carousel-caption d-md-block">
+                <p><a asp-controller="Gallery" class="capFoot text-white fs-2 p-2">WATCHOUT THE FEATURED AUTOMOTIVE IMAGES</a></p>
             </div>
         </div>
         <div class="carousel-item" data-bs-interval="4500">

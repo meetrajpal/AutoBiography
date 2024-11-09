@@ -36,7 +36,7 @@ namespace AutoBiography.Controllers
                 string[] collectionIds = await System.IO.File.ReadAllLinesAsync("wwwroot/collection_ids.txt");
                 string formattedCollectionIds = string.Join(",", collectionIds);
 
-                string apiUrl = $"https://api.unsplash.com/search/photos?query={query}&client_id=_0WKK3vG6LZYnpbYsEOvA8dLNVUheRvDk25SlE9DRQY&page={page}&per_page={perPage}&collections={formattedCollectionIds}";
+                string apiUrl = $"https://api.unsplash.com/search/photos?query={query}&client_id={Environment.GetEnvironmentVariable("UNSPLASH_CLIENT_ID")}&page={page}&per_page={perPage}&collections={formattedCollectionIds}";
 
                 HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
 

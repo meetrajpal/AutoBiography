@@ -19,49 +19,49 @@
 
 <center>
     <div class="signDiv w-50">
-    <form class="login mx-3" asp-action="Create" method="post" enctype="multipart/form-data">
-        <fieldset class="flex-grow-1">
-            <h1 class="text-white fw-bolder">Sign Up</h1>
-            <div class="has-danger has-success row mb-3">
-                <input asp-for="Username" class="form-control" placeholder="Select Your Username">
-                <span asp-validation-for="Username" class="text-danger"></span>
-            </div>
-            <div class="row mb-3">
-                <input asp-for="FullName" class="form-control" placeholder="Enter Your Full Name">
-                <span asp-validation-for="FullName" class="text-danger"></span>
-            </div>
-            <div class="row mb-3">
-                <input asp-for="Email" class="form-control" placeholder="Enter Your Email">
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="row mb-3">
-                    <input asp-for="Picture" class="form-control" accept=".jpg,.jpeg,.png">
-            </div>
-            
-            <div class="row mb-3">
-                <input asp-for="Password" class="form-control" placeholder="Enter your password">
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="row mb-3">
-                <input asp-for="CnfPassword" class="form-control" id="inputPassword4" placeholder="Re-enter your password">
-                <span asp-validation-for="CnfPassword" class="text-danger"></span>
-            </div> 
-            <div class="row mb-3">
-                <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-                    <input asp-for="AcceptTerms" class="btn-check" autocomplete="off" required >
-                        <label asp-for="AcceptTerms" class="btn btn-primary"><i class="bi bi-check2-circle"></i> &nbsp; Accept Terms and Condiditions</label>
+        <form class="login mx-3" asp-action="Create" method="post" enctype="multipart/form-data">
+            <fieldset class="flex-grow-1">
+                <h1 class="text-white fw-bolder">Sign Up</h1>
+                <div class="has-danger has-success row mb-3">
+                    <input asp-for="Username" class="form-control" placeholder="Select Your Username">
+                    <span asp-validation-for="Username" class="text-white bg-danger"></span>
                 </div>
-                <br/>
-                <span asp-validation-for="AcceptTerms" class="text-danger"></span>
-            </div>
-            <button type="submit" class="btn btn-outline-success">Create Account</button>
-        </fieldset>
-    </form>
-    <br />
-    <a class="text-white" asp-controller="Auth" asp-action="Login">Already member of AutoBiography?</a>
-</div>
+                <div class="row mb-3">
+                    <input asp-for="FullName" class="form-control" placeholder="Enter Your Full Name">
+                    <span asp-validation-for="FullName" class="text-white bg-danger"></span>
+                </div>
+                <div class="row mb-3">
+                    <input asp-for="Email" class="form-control" placeholder="Enter Your Email">
+                    <span asp-validation-for="Email" class="text-white bg-danger"></span>
+                </div>
+                <div class="row mb-3">
+                    <input asp-for="Picture" class="form-control" accept=".jpg,.jpeg,.png">
+                </div>
+
+                <div class="row mb-3">
+                    <input asp-for="Password" class="form-control" placeholder="Enter your password">
+                    <span asp-validation-for="Password" class="text-white bg-danger"></span>
+                </div>
+                <div class="row mb-3">
+                    <input asp-for="CnfPassword" class="form-control" id="inputPassword4" placeholder="Re-enter your password">
+                    <span asp-validation-for="CnfPassword" class="text-white bg-danger"></span>
+                </div>
+                <div class="row mb-3">
+                    <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                        <input asp-for="AcceptTerms" class="btn-check" autocomplete="off" required>
+                        <label asp-for="AcceptTerms" class="btn btn-primary"><i class="bi bi-check2-circle"></i> &nbsp; Accept Terms and Condiditions</label>
+                    </div>
+                    <br />
+                    <span asp-validation-for="AcceptTerms" class="text-white bg-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-outline-success">Create Account</button>
+            </fieldset>
+        </form>
+        <br />
+        <a class="text-white" asp-controller="Auth" asp-action="Login">Already member of AutoBiography?</a>
+    </div>
 </center>
-@section Scripts{
+@section Scripts {
     @{
         <partial name="_ValidationScriptsPartial" />
     }

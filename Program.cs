@@ -7,7 +7,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AutoBiography.Data.ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddHttpClient();
-
+DotNetEnv.Env.Load();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
