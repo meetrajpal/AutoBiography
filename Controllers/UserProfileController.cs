@@ -81,6 +81,54 @@ namespace AutoBiography.Controllers
             return View();
         }
 
+        public IActionResult Update(int? id)
+        {
+            if (!HttpContext.Request.Cookies.TryGetValue("UserInfo", out string? userInfo))
+                return RedirectToAction(controllerName: "Auth", actionName: "Login");
+
+            UserProfile? userProfile = _db.Users.FirstOrDefault(data => data.Id == id);
+            if (userProfile == null)
+            {
+                return NotFound();
+            }
+
+            return View(userProfile);
+        }
+
+        [HttpPost]
+        async public Task<IActionResult> Update(UserProfile user)
+        {
+            if (!HttpContext.Request.Cookies.TryGetValue("UserInfo", out string? userInfo))
+                return RedirectToAction(controllerName: "Auth", actionName: "Login");
+
+            var existingUser = await _db.Users.FindAsync(user.Id);
+            if (existingUser == null)
+            {
+                return NotFound();
+            }
+
+
+            if (user.Picture != null)
+            {
+                var filePath = Path.Combine("wwwroot/images", user.Picture.FileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await user.Picture.CopyToAsync(stream);
+                }
+
+                existingUser.PicUri = "/images/" + user.Picture.FileName;
+            }
+
+            existingUser.Username = user.Username;
+            existingUser.Email = user.Email;
+            existingUser.FullName = user.FullName;
+
+            _db.Update(existingUser);
+            _db.SaveChanges();
+            return RedirectToAction(actionName:"Index", new { username = user.Username });
+        }
+
         public IActionResult Delete(int? id)
         {
             UserProfile? userProfile = _db.Users.FirstOrDefault(data => data.Id == id);

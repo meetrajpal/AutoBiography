@@ -1,6 +1,8 @@
 ﻿@using AutoBiography.DTO.REQ
 @model LoginReqDto
-
+@{
+    ViewData["Title"] = "Login";
+}
 <style>
     body{
         background-image: url("https://www.wsupercars.com/wallpapers-regular/Pagani/2016-Pagani-Huayra-BC-014-1080.jpg");
@@ -36,13 +38,13 @@
             </div>
             
             <div>
-                <button type="submit" class="btn btn-primary">Log In</button>
+                <button type="submit" class="btn btn-outline-success">Log In</button>
             </div>
 
         </fieldset>
     </form>
     <br />
-    <a class="btn" asp-controller="UserProfile" asp-action="Create">New To Auto Biography?</a>
+    <a class="text-white" asp-controller="UserProfile" asp-action="Create">New to AutoBiography?</a>
 </div>
 </center>
 @section Scripts {

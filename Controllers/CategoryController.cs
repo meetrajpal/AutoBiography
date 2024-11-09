@@ -96,6 +96,7 @@ namespace AutoBiography.Controllers
             return RedirectToAction("Index");
         }
 
+        
         public IActionResult Delete(int? id)
         {
             if (HttpContext.Request.Cookies.TryGetValue("UserInfo", out string? userInfo))

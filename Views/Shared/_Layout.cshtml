@@ -64,13 +64,13 @@
                                 @{
                                     if (@ViewBag.UserInfo != null)
                                     {
-                                        <a class="dropdown-item text-white" asp-controller="UserProfile" asp-action="Index" asp-route-username="@ViewBag.UserInfo">Profile</a>
-                                        <a class="dropdown-item text-white" asp-controller="Auth" asp-action="Logout">Log Out</a>
+                                        <a class="dropdown-item text-black" asp-controller="UserProfile" asp-action="Index" asp-route-username="@ViewBag.UserInfo">Profile</a>
+                                        <a class="dropdown-item text-black" asp-controller="Auth" asp-action="Logout">Log Out</a>
                                     }
                                     else
                                     {
-                                        <a class="dropdown-item text-white" asp-controller="UserProfile" asp-action="Create">Sign Up</a>
-                                        <a class="dropdown-item text-white" asp-controller="Auth" asp-action="Login">Log In</a>
+                                        <a class="dropdown-item text-black" asp-controller="UserProfile" asp-action="Create">Sign Up</a>
+                                        <a class="dropdown-item text-black" asp-controller="Auth" asp-action="Login">Log In</a>
                                     }
                                 }
                             </div>

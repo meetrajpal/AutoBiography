@@ -1,5 +1,7 @@
 ﻿@model UserProfile
-
+@{
+    ViewData["Title"] = "Sign Up";
+}
 <style>
     body {
         background-image: url("https://www.wsupercars.com/wallpapers-regular/Novitec/2015-Novitec-Torado-Lamborghini-Huracan-N-Largo-003-1080.jpg");
@@ -52,9 +54,11 @@
                 <br/>
                 <span asp-validation-for="AcceptTerms" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-primary">Create Account</button>
+            <button type="submit" class="btn btn-outline-success">Create Account</button>
         </fieldset>
     </form>
+    <br />
+    <a class="text-white" asp-controller="Auth" asp-action="Login">Already member of AutoBiography?</a>
 </div>
 </center>
 @section Scripts{

@@ -1,0 +1,49 @@
+﻿@model UserProfile
+@{
+    ViewData["Title"] = "Profile";
+}
+<style>
+    body {
+        background-image: url("https://www.wsupercars.com/wallpapers-regular/Novitec/2015-Novitec-Torado-Lamborghini-Huracan-N-Largo-003-1080.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .signDiv {
+        padding: 10vh;
+        backdrop-filter: blur(5px);
+        border-radius: 10vh;
+        box-shadow: 0 0 8px white;
+        padding-bottom: 5vh;
+    }
+</style>
+
+<center>
+    <div class="signDiv w-50">
+        <form class="login mx-3" asp-action="Update" method="post" enctype="multipart/form-data">
+            <fieldset class="flex-grow-1">
+                <input type="hidden" asp-for="Id" value="@Model.Id" />
+                <input type="hidden" asp-for="Username" value="@Model.Username" />
+                <input type="hidden" asp-for="Email" value="@Model.Email" />
+                <input type="hidden" asp-for="Password" value="@Model.Password" />
+                <h1 class="text-white fw-bolder">Update Account</h1>
+                <br />
+                <div class="row mb-3">
+                    <input asp-for="FullName" class="form-control" placeholder="Enter Your Full Name">
+                    <span asp-validation-for="FullName" class="text-danger"></span>
+                </div>
+                <div class="row mb-3">
+                    <input asp-for="Picture" class="form-control" accept=".jpg,.jpeg,.png">
+                </div>
+                <button type="submit" class="btn btn-outline-warning text-black">Update Account</button>
+                <br />
+                <button asp-action="Index" class="btn btn-outline-danger mt-3">Cancel</button>
+            </fieldset>
+        </form>
+    </div>
+</center>
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

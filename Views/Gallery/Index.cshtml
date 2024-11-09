@@ -1,5 +1,7 @@
-﻿@model List<Gallery>
-
+﻿@model UserSavedPics
+@{
+    ViewData["Title"] = "Gallery";
+}
 <style>
     body {
         background-image: url("https://www.wsupercars.com/wallpapers-regular/Pagani/2016-Pagani-Huayra-BC-019-1080.jpg");
@@ -8,11 +10,187 @@
         background-position: center;
         margin: 0;
     }
+
+    .image-container {
+        position: relative;
+        display: inline-block;/* 
+        margin: 10px; */
+    }
+
+    .image {
+        display: block;
+    }
+
+    .button-overlay {
+        position: absolute;
+        top: 7px; 
+        right: -7%;
+        transform: translateX(-50%);
+        background-color: rgba(0, 0, 0, 0.5); 
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    .button-overlay:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .button-overlay-download {
+        position: absolute;
+        top: 52px;
+        right: -7%;
+        transform: translateX(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border: none;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    .button-overlay-download:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .button-overlay-save {
+        position: absolute;
+        top: 97px;
+        right: -7%;
+        transform: translateX(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border: none;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    .button-overlay-save:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .pagination {
+        margin: 20px;
+        margin-bottom: 60px;
+        text-align: center;
+        width: 30%;
+    }
+
+    .pagination-button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 15px;
+        margin: 5px;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+
+    .pagination-button:hover {
+        background-color: #0056b3;
+    }
+
+    .pagination span {
+        padding: 10px 15px;
+        margin: 5px;
+    }
 </style>
 
+<form action="@Url.Action("Index")" method="get">
+    <div class="input-group mb-3">
+        @if(ViewBag.SearchQuery != "car")
+        {
+            <input class="form-control" type="search" name="query" placeholder="Search" value="@ViewBag.SearchQuery">
+        }
+        else
+        {
+            <input class="form-control" type="search" name="query" placeholder="Search">
+        }
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+    </div>
+</form>
+<br />
 <main class="d-flex flex-wrap justify-content-center">
-    @foreach(var obj in Model)
+    @if (ViewBag.SmallImageUrl != null && ViewBag.FullImageUrl != null)
     {
-        <img src="@obj.URI" alt="@obj.Title" width="300" height="300">
+        var smallUrls = (string[])ViewBag.SmallImageUrl;
+        var fullUrls = (string[])ViewBag.FullImageUrl;
+        var imageSlugs = (string[])ViewBag.ImageSlugs;
+
+        @* var imagePairs = (List<(string SmallUrl, string FullUrl)>)ViewBag.ImagePairs; *@
+
+        for (var i = 0; i < smallUrls.Length; i++)  @*foreach (var pair in imagePairs) *@
+        {
+            <div class="image-container">
+                <img src="@smallUrls[i]" alt="@imageSlugs[i]" class="image" width="300" height="300" />
+                <a href="@fullUrls[i]" class="button-overlay" target="_blank"><i class="bi bi-eye"></i></a>
+                <button class="button-overlay-download" onclick="downloadImage('@fullUrls[i]')">
+                    <i class="bi bi-download"></i>
+                </button>
+                <form asp-controller="UserSavedPics" asp-action="SaveImage" asp-route-page="@ViewBag.CurrentPage" asp-route-query="@ViewBag.SearchQuery" method="post">
+                    <input asp-for="Username" type="hidden" value="@ViewBag.UserInfo"/>
+                    <input asp-for="ThumbUri" type="hidden" value="@smallUrls[i]" />
+                    <input asp-for="FullUri" type="hidden" value="@fullUrls[i]" />
+                    <input asp-for="Slug" type="hidden" value="@imageSlugs[i]" />
+                    <button class="button-overlay-save" type="submit">
+                        <i class="bi bi-bookmark"></i>
+                    </button>
+                </form>
+            </div>
+        }
+
+
+        
+    }
+    else
+    {
+        <p>Oops! Something went wrong.</p>
     }
 </main>
+
+<div class="pagination mx-auto" role="group">
+    @if (ViewBag.CurrentPage > 1)
+    {
+        <a href="@Url.Action("Index", new { page = ViewBag.CurrentPage - 1, query = ViewBag.SearchQuery })" class="pagination-button me-auto">Previous</a>
+    }
+    else
+    {
+        <a class="w-25 me-4"></a>
+    }
+
+    <span>Page @ViewBag.CurrentPage of @ViewBag.TotalPages</span>
+
+    @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+    {
+        <a href="@Url.Action("Index", new { page = ViewBag.CurrentPage + 1, query = ViewBag.SearchQuery })" class="pagination-button ms-auto">Next</a>
+    }
+    else
+    {
+        <a class="ms-auto"></a>
+    }
+</div>
+
+<script>
+    function downloadImage(url) {
+        fetch(url, {
+            method: 'GET',
+            headers: {}
+        })
+        .then(response => response.blob())
+        .then(blob => {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = 'image.jpg';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+        })
+        .catch(() => alert('Failed to download the image.'));
+    }
+</script>
