@@ -183,7 +183,7 @@
                 <a class="button-overlay" onclick="openModal('@fullUrls[i]')">
                     <i class="bi bi-eye"></i>
                 </a>
-                <button class="button-overlay-download" onclick="downloadImage('@fullUrls[i]')">
+                <button class="button-overlay-download" onclick="downloadImage('@fullUrls[i]', '@imageSlugs[i]')">
                     <i class="bi bi-download"></i>
                 </button>
                 <form id="saveImageForm-@i" method="post">
@@ -230,7 +230,7 @@
 </div>
 
 <script>
-    function downloadImage(url) {
+    function downloadImage(url, name) {
         fetch(url, {
             method: 'GET',
             headers: {}
@@ -241,7 +241,7 @@
             const a = document.createElement('a');
             a.style.display = 'none';
             a.href = url;
-            a.download = 'image.jpg';
+            a.download = `${name}.jpg`;
             document.body.appendChild(a);
             a.click();
             window.URL.revokeObjectURL(url);

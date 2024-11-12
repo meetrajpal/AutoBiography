@@ -14,8 +14,7 @@
 
     .image-container {
         position: relative;
-        display: inline-block; /*
-            margin: 10px; */
+        display: inline-block;
     }
 
     .image {
@@ -35,9 +34,9 @@
         font-size: 14px;
     }
 
-        .button-overlay:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
+    .button-overlay:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
 
     .button-overlay-download {
         position: absolute;
@@ -53,9 +52,9 @@
         font-size: 14px;
     }
 
-        .button-overlay-download:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
+    .button-overlay-download:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
 
     .button-overlay-save {
         position: absolute;
@@ -71,9 +70,9 @@
         font-size: 14px;
     }
 
-        .button-overlay-save:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
+    .button-overlay-save:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
 
     .pagination {
         margin: 20px;
@@ -91,18 +90,59 @@
         border-radius: 5px;
     }
 
-        .pagination-button:hover {
-            background-color: #0056b3;
-        }
+    .pagination-button:hover {
+        background-color: #0056b3;
+    }
 
     .pagination span {
         padding: 10px 15px;
         margin: 5px;
     }
 
-    
-</style>
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        padding-top: 60px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(5px);
+    }
 
+    .modal-content {
+        margin: auto;
+        display: block;
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .close {
+        position: absolute;
+        top: 20px;
+        right: 35px;
+        color: #ffffff;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #ccc;
+        cursor: pointer;
+    }
+</style>
+<div id="imageModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
+</div>
 <main class="d-flex flex-wrap justify-content-center">
     @if (ViewBag.SmallImageUrl != null && ViewBag.FullImageUrl != null)
     {
@@ -115,8 +155,10 @@
         {
             <div class="image-container">
                 <img src="@smallUrls[i]" alt="@imageSlugs[i]" class="image" width="300" height="300" />
-                <a href="@fullUrls[i]" class="button-overlay" target="_blank"><i class="bi bi-eye"></i></a>
-                <button class="button-overlay-download" onclick="downloadImage('@fullUrls[i]')">
+                <a class="button-overlay" onclick="openModal('@fullUrls[i]')">
+                    <i class="bi bi-eye"></i>
+                </a>
+                <button class="button-overlay-download" onclick="downloadImage('@fullUrls[i]', '@imageSlugs[i]')">
                     <i class="bi bi-download"></i>
                 </button>
                 <button class="button-overlay-save" type="button" onclick="unsaveImage(@imageIds[i])">
@@ -151,7 +193,7 @@
 </div>
 
 <script>
-    function downloadImage(url) {
+    function downloadImage(url, name) {
         fetch(url, {
             method: 'GET',
             headers: {}
@@ -162,7 +204,7 @@
                 const a = document.createElement('a');
                 a.style.display = 'none';
                 a.href = url;
-                a.download = 'image.jpg';
+                a.download = `${name}.jpg`;
                 document.body.appendChild(a);
                 a.click();
                 window.URL.revokeObjectURL(url);
@@ -189,4 +231,13 @@
             .catch(error => console.error('Error:', error));
     }
 
+    function openModal(imageUrl) {
+        document.getElementById("modalImage").src = imageUrl;
+        document.getElementById("imageModal").style.display = "block";
+    }
+
+    function closeModal() {
+        document.getElementById("modalImage").src = "";
+        document.getElementById("imageModal").style.display = "none";
+    }
 </script>

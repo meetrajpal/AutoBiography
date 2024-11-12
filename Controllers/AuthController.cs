@@ -13,8 +13,6 @@ namespace AutoBiography.Controllers
         {
             _db = db;
         }
-
-
         public IActionResult Login()
         {
             return View();
