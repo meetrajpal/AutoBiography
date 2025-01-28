@@ -4,10 +4,18 @@
 
     // Add services to the container.
     builder.Services.AddControllersWithViews();
-    builder.Services.AddDbContext<AutoBiography.Data.ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+    DotNetEnv.Env.Load();
+
+    string connectionString = Environment.GetEnvironmentVariable("DB_STR");
+
+
+    builder.Services.AddDbContext<AutoBiography.Data.ApplicationDbContext>(options =>
+        options.UseSqlServer(connectionString));
+
 
     builder.Services.AddHttpClient();
-    DotNetEnv.Env.Load();
+
     var app = builder.Build();
 
     // Configure the HTTP request pipeline.
