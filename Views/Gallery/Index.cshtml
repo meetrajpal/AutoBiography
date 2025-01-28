@@ -250,6 +250,7 @@
     }
 
     function submitFormData(index) {
+        const apiUrl = '@ViewBag.ApiUrl';
         const form = document.getElementById(`saveImageForm-${index}`);
         const formData = new FormData(form);
 
@@ -258,7 +259,7 @@
             jsonData[key] = value;
         });
 
-        fetch('https://localhost:5245/api/user-saved-pics', {
+        fetch(`${apiUrl}/api/user-saved-pics`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

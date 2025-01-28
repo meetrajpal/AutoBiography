@@ -30,7 +30,8 @@ namespace AutoBiography.Controllers
 
             try
             {
-                string apiUrl = $"https://localhost:5245/api/user-saved-pics?username={ViewBag.UserInfo}&page={page}&pageSize={perPage}";
+                
+                string apiUrl = $"{Environment.GetEnvironmentVariable("AUTO_BIO_API")}/api/user-saved-pics?username={ViewBag.UserInfo}&page={page}&pageSize={perPage}";
 
                 HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
 
@@ -67,6 +68,7 @@ namespace AutoBiography.Controllers
                     ViewBag.ImageIds = imageIds.ToArray();
                     ViewBag.CurrentPage = page;
                     ViewBag.TotalPages = totalPages;
+                    ViewBag.ApiUrl = Environment.GetEnvironmentVariable("AUTO_BIO_API");
                 }
 
                 return View();

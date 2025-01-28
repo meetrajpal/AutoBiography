@@ -213,7 +213,8 @@
     }
 
     function unsaveImage(id) {
-        fetch(`https://localhost:5245/api/user-saved-pics?id=${id}`, {
+        const apiUrl = '@ViewBag.ApiUrl';
+        fetch(`${apiUrl}/api/user-saved-pics?id=${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'

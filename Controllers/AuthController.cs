@@ -41,7 +41,7 @@ namespace AutoBiography.Controllers
                     var cookieOptions = new CookieOptions
                     { 
                         HttpOnly = true,                   
-                        Secure = true,                     
+                        Secure = false,                     
                         SameSite = SameSiteMode.Strict
                     };
 

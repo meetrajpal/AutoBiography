@@ -76,6 +76,7 @@ namespace AutoBiography.Controllers
                     ViewBag.ImageSlugs = imageSlugs.ToArray();
                     ViewBag.CurrentPage = page;
                     ViewBag.TotalPages = totalPages;
+                    ViewBag.ApiUrl = Environment.GetEnvironmentVariable("AUTO_BIO_API");
                 }
 
                 return View();
